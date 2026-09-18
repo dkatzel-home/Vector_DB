@@ -87,7 +87,6 @@ def print_analogy_result(result_vector: np.ndarray, original_words: List[str], t
         top_n (int): Number of similar words to return.
     """
     similar_words = word2vec_model.similar_by_vector(result_vector, topn=top_n)
-    print("\nVector arithmetic: " + " + ".join(original_words))
     print("Most similar words:")
 
     for word, similarity in similar_words:
@@ -105,16 +104,18 @@ def compute_analogy():
 
     try:
         result_vector = vector_arithmetic((word1, 1), (word2, -1), (word3, 1))
-        print(f"\n{word1} is to {word2} as {word3} is to ?")
+        print(f"\n{word1} - {word2} + {word3} = ?")
         print_analogy_result(result_vector, [word1, word2, word3], top_n=5)
 
-        print("\n Play again? (y/n): ")
-        play_again = input().lower()
-        if play_again == "y":
-            compute_analogy()
+        
 
     except ValueError as e:
         print(e)
+
+    print("\n Play again? (y/n): ")
+    play_again = input().lower()
+    if play_again == "y":
+        compute_analogy()
 
 if __name__ == "__main__":
     compute_analogy()
