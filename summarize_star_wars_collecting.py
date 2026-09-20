@@ -10,7 +10,7 @@ from chromadb.utils import embedding_functions
 from transformers import pipeline
 import transformers
 
-# 1. Define your folder path and setup OpenAI API Key
+# 1. Data Not in git for copyright reasons...
 FOLDER_PATH = "./data/Read_Five_Book"
 
 # 2. Load all .md files from the directory
