@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 import os
+import sys
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from chromadb.utils import embedding_functions
+from transformers import pipeline
+import transformers
 
 # 1. Define your folder path and setup OpenAI API Key
 FOLDER_PATH = "./data/Read_Five_Book"
@@ -49,12 +52,24 @@ vector_store = Chroma.from_documents(
 
 print(f"Successfully loaded {len(final_docs)} chunks into ChromaDB.")
 
-query_text = "What year was the Early Bird Certificate in stores?"
+query_text = sys.argv[1]
 docs = vector_store.similarity_search(
     query=query_text,
     k=2
 )
-
+print(transformers.__version__)
 for doc in docs:
     print(f"Content: {doc.page_content}")
     print(f"Metadata: {doc.metadata}\n---")
+
+# 6. Abstractive Summarization with a Local Hugging Face Model
+# We use the 'T5-small' model which runs entirely on your local machine
+summarizer = pipeline("summarization", model="t5-small")
+
+summary = summarizer(
+    docs[0].page_content, 
+    max_length=200, 
+    min_length=10,
+)
+
+print(f"--- Final Summary ---\n{summary[0]['summary_text']}")

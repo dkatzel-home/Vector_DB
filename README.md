@@ -30,4 +30,4 @@ Answer questions about Star Wars Collecting by using a custom Vector Database us
 - Parse my collecting information books in pdf format into Markdown
 - Chunk markdown files into ChromaDb 
 - Query ChromaDb to fetch matching documents
-- (TODO) use small LLM to summarize returned documents
+- use small LLM to summarize returned documents
