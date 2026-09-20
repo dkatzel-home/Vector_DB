@@ -31,3 +31,16 @@ Answer questions about Star Wars Collecting by using a custom Vector Database us
 - Chunk markdown files into ChromaDb 
 - Query ChromaDb to fetch matching documents
 - use HuggingFace Transformers to summarize returned documents
+
+### Example
+
+```
+ python3 summarize_star_wars_collecting.py "What variations are in Leia's hair"
+
+...
+<snip debug output and full content doc hits>
+...
+
+--- Final Summary ---
+leia appears with metallic green looking hair which is highly likely down to paint degradation over the years .
+```
