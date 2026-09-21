@@ -1,0 +1,2 @@
+# Star Wars Style-A VIDEO RELEASES
+When Star Wars came out on home video in 1982, video stores advertised the movie with a Syle-A 27x41 poster.  The image and size are the same; the only difference is on the right side just under the artwork by Tom Jung the copyright information is different.  An original theatrical poster will say ©1977 Twentieth Century-Fox while the video poster will say ©1977 LUCASFILM LTD.  Also the video poster is printed on heavier paper than a normal poster but you can't really tell that unless you have it in hand (and out of a frame).

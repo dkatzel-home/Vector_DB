@@ -5,13 +5,11 @@ import sys
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain_openai import OpenAIEmbeddings
-from chromadb.utils import embedding_functions
-from transformers import pipeline
-import transformers
+
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 # 1. Data Not in git for copyright reasons...
-FOLDER_PATH = "./data/Read_Five_Book"
+FOLDER_PATH = "./data"
 
 # 2. Load all .md files from the directory
 # TextLoader is used under the hood to ensure proper text parsing
@@ -55,21 +53,27 @@ print(f"Successfully loaded {len(final_docs)} chunks into ChromaDB.")
 query_text = sys.argv[1]
 docs = vector_store.similarity_search(
     query=query_text,
-    k=2
+    k=3
 )
-print(transformers.__version__)
+input_text = f"summarize the following text to answer the question '{query_text}' : {docs[0].page_content}"
 for doc in docs:
     print(f"Content: {doc.page_content}")
     print(f"Metadata: {doc.metadata}\n---")
 
-# 6. Abstractive Summarization with a Local Hugging Face Model
-# We use the 'T5-small' model which runs entirely on your local machine
-summarizer = pipeline("summarization", model="t5-small")
 
-summary = summarizer(
-    docs[0].page_content, 
-    max_length=200, 
-    min_length=10,
+model_name = "google-t5/t5-small"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+
+# Tokenize and generate summary
+inputs = tokenizer(input_text, return_tensors="pt", max_length=512, truncation=True)
+outputs = model.generate(
+    inputs["input_ids"], max_length=150, min_length=40, length_penalty=2.0, num_beams=4
 )
 
-print(f"--- Final Summary ---\n{summary[0]['summary_text']}")
+# Decode and print result
+summary = tokenizer.decode(outputs[0], skip_special_tokens=True)
+print(f"\n---\nquery:\n{query_text}\n")
+print("\n---\nSummary:\n")
+print(summary)
+

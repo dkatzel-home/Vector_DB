@@ -28,6 +28,7 @@ Italians: 0.5600
 Answer questions about Star Wars Collecting by using a custom Vector Database using my personal knowledge store.
 
 - Parse my collecting information books in pdf format into Markdown
+- Add extra markdown files with more information from my own collecting education
 - Chunk markdown files into ChromaDb 
 - Query ChromaDb to fetch matching documents
 - use HuggingFace Transformers to summarize returned documents
@@ -35,12 +36,16 @@ Answer questions about Star Wars Collecting by using a custom Vector Database us
 ### Example
 
 ```
- python3 summarize_star_wars_collecting.py "What variations are in Leia's hair"
+$ python3 summarize_star_wars_collecting.py "How do you tell if a Star Wars Style-A poster is a bootleg?"
 
-...
-<snip debug output and full content doc hits>
-...
+ ...
+ <snip debug info>
+---
+query:
+How do you tell if a Star Wars Style-A poster is a bootleg?
 
---- Final Summary ---
-leia appears with metallic green looking hair which is highly likely down to paint degradation over the years .
+---
+Summary:
+
+the most infamous bootleg of the Star Wars style-A poster is the “hairy belt” Luke bootleg of the 1st print which has a hair on Luke's belt.
 ```
