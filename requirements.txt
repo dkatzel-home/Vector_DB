@@ -60,7 +60,7 @@ httptools==0.8.0
 httpx @ file:///home/conda/feedstock_root/build_artifacts/httpx_1733663348460/work
 httpx-sse==0.4.3
 httpx2==2.13.0
-huggingface_hub==0.36.2
+huggingface_hub==1.32.0
 hyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1737618333194/work
 idna==3.20
 importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_importlib-metadata_1779714582/work
@@ -186,7 +186,7 @@ tokenizers==0.23.2
 tomli @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_tomli_1774492402/work
 torch==2.14.0
 tqdm==4.70.1
-transformers==4.17.0
+transformers==5.17.0
 triton==3.8.0
 truststore @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_truststore_1766494826/work
 typer==0.27.2
